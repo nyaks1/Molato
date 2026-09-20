@@ -1,0 +1,180 @@
+{
+  "case": "Molato — The Docket",
+  "generated_at": "2026-09-20T11:12:47.105892+00:00",
+  "source": "detector/fixtures/sample_logcat.txt",
+  "owasp": "OWASP Mobile Top 10 — M6: Inadequate Privacy Controls",
+  "popia_source": "Protection of Personal Information Act 4 of 2013 (South Africa)",
+  "findings": [
+    {
+      "id": "001",
+      "rule": "auth_login_pii_in_logs",
+      "severity": "high",
+      "log_line": 4,
+      "evidence": "09-19 08:40:03.440  9999  9999 I flutter : [AUTH] login success user=Neo Serame email=neo.serame@demo.molato.local account=10098765432",
+      "extracted": {
+        "fullName": "Neo Serame",
+        "email": "neo.serame@demo.molato.local",
+        "accountNumber": "10098765432"
+      },
+      "offense": {
+        "file": "app/lib/services/insecure_logger.dart",
+        "line": 6,
+        "description": "Login success log writes name, email and account number to device logs"
+      },
+      "owasp": "M6: Inadequate Privacy Controls — sensitive data in logs",
+      "popia": [
+        {
+          "condition": "Condition 7 — Security safeguards",
+          "section": "s.19(1)",
+          "citation": "A responsible party must secure the integrity and confidentiality of personal information in its possession or under its control by taking appropriate, reasonable technical and organisational measures to prevent— ... (b) unlawful access to or processing of personal information.",
+          "why_broken": "Raw personal information is persisted in a log buffer with no access control, redaction, or integrity protection."
+        },
+        {
+          "condition": "Condition 3 — Purpose specification",
+          "section": "s.13(1)",
+          "citation": "Personal information must be collected for a specific, explicitly defined and lawful purpose related to a function or activity of the responsible party.",
+          "why_broken": "Authentication UI only needs a session flag; logging full identity + account number exceeds that purpose."
+        }
+      ]
+    },
+    {
+      "id": "002",
+      "rule": "tx_amount_account_in_logs",
+      "severity": "high",
+      "log_line": 6,
+      "evidence": "09-19 08:40:05.880  9999  9999 I flutter : [TX] processed for Neo Serame | account=10098765432 | amount=ZAR450.0",
+      "extracted": {
+        "fullName": "Neo Serame",
+        "accountNumber": "10098765432",
+        "amount": "ZAR450.0"
+      },
+      "offense": {
+        "file": "app/lib/services/insecure_logger.dart",
+        "line": 16,
+        "description": "Transaction log writes account number, full name and amount to device logs"
+      },
+      "owasp": "M6: Inadequate Privacy Controls — sensitive data in logs",
+      "popia": [
+        {
+          "condition": "Condition 7 — Security safeguards",
+          "section": "s.19(1)",
+          "citation": "A responsible party must secure the integrity and confidentiality of personal information in its possession or under its control by taking appropriate, reasonable technical and organisational measures to prevent— ... (b) unlawful access to or processing of personal information.",
+          "why_broken": "Financial personal information is written in plaintext and can be read by anyone with log access (adb, MDM, bugreports)."
+        },
+        {
+          "condition": "Condition 3 — Purpose specification",
+          "section": "s.13(1)",
+          "citation": "Personal information must be collected for a specific, explicitly defined and lawful purpose related to a function or activity of the responsible party.",
+          "why_broken": "Showing a confirmation snackbar needs an amount, not the user's account number and legal name in logs."
+        }
+      ]
+    },
+    {
+      "id": "002",
+      "rule": "tx_amount_account_in_logs",
+      "severity": "high",
+      "log_line": 7,
+      "evidence": "09-19 08:40:06.200  9999  9999 I flutter : [TX] processed for Neo Serame | account=10098765432 | amount=ZAR120.5",
+      "extracted": {
+        "fullName": "Neo Serame",
+        "accountNumber": "10098765432",
+        "amount": "ZAR120.5"
+      },
+      "offense": {
+        "file": "app/lib/services/insecure_logger.dart",
+        "line": 16,
+        "description": "Transaction log writes account number, full name and amount to device logs"
+      },
+      "owasp": "M6: Inadequate Privacy Controls — sensitive data in logs",
+      "popia": [
+        {
+          "condition": "Condition 7 — Security safeguards",
+          "section": "s.19(1)",
+          "citation": "A responsible party must secure the integrity and confidentiality of personal information in its possession or under its control by taking appropriate, reasonable technical and organisational measures to prevent— ... (b) unlawful access to or processing of personal information.",
+          "why_broken": "Financial personal information is written in plaintext and can be read by anyone with log access (adb, MDM, bugreports)."
+        },
+        {
+          "condition": "Condition 3 — Purpose specification",
+          "section": "s.13(1)",
+          "citation": "Personal information must be collected for a specific, explicitly defined and lawful purpose related to a function or activity of the responsible party.",
+          "why_broken": "Showing a confirmation snackbar needs an amount, not the user's account number and legal name in logs."
+        }
+      ]
+    },
+    {
+      "id": "003",
+      "rule": "session_logout_account_in_logs",
+      "severity": "medium",
+      "log_line": 9,
+      "evidence": "09-19 08:40:08.300  9999  9999 I flutter : [SESSION] logout account=10098765432 user=Neo Serame",
+      "extracted": {
+        "accountNumber": "10098765432",
+        "fullName": "Neo Serame"
+      },
+      "offense": {
+        "file": "app/lib/services/insecure_logger.dart",
+        "line": 21,
+        "description": "Logout log still writes account number and full name to device logs"
+      },
+      "owasp": "M6: Inadequate Privacy Controls — sensitive data in logs",
+      "popia": [
+        {
+          "condition": "Condition 7 — Security safeguards",
+          "section": "s.19(1)",
+          "citation": "A responsible party must secure the integrity and confidentiality of personal information in its possession or under its control by taking appropriate, reasonable technical and organisational measures to prevent— ... (b) unlawful access to or processing of personal information.",
+          "why_broken": "Session teardown re-exposes identifiers that should leave the device memory path with the session, not land in logs."
+        },
+        {
+          "condition": "Condition 3 — Purpose specification",
+          "section": "s.13(1)",
+          "citation": "Personal information must be collected for a specific, explicitly defined and lawful purpose related to a function or activity of the responsible party.",
+          "why_broken": "Logout needs no PII; the app's purpose at that step is only to clear local session state."
+        }
+      ]
+    },
+    {
+      "id": "001",
+      "rule": "auth_login_pii_in_logs",
+      "severity": "high",
+      "log_line": 10,
+      "evidence": "09-19 08:40:09.001  9999  9999 I flutter : [AUTH] login success user=Neo Serame email=neo.serame@demo.molato.local account=10098765432",
+      "extracted": {
+        "fullName": "Neo Serame",
+        "email": "neo.serame@demo.molato.local",
+        "accountNumber": "10098765432"
+      },
+      "offense": {
+        "file": "app/lib/services/insecure_logger.dart",
+        "line": 6,
+        "description": "Login success log writes name, email and account number to device logs"
+      },
+      "owasp": "M6: Inadequate Privacy Controls — sensitive data in logs",
+      "popia": [
+        {
+          "condition": "Condition 7 — Security safeguards",
+          "section": "s.19(1)",
+          "citation": "A responsible party must secure the integrity and confidentiality of personal information in its possession or under its control by taking appropriate, reasonable technical and organisational measures to prevent— ... (b) unlawful access to or processing of personal information.",
+          "why_broken": "Raw personal information is persisted in a log buffer with no access control, redaction, or integrity protection."
+        },
+        {
+          "condition": "Condition 3 — Purpose specification",
+          "section": "s.13(1)",
+          "citation": "Personal information must be collected for a specific, explicitly defined and lawful purpose related to a function or activity of the responsible party.",
+          "why_broken": "Authentication UI only needs a session flag; logging full identity + account number exceeds that purpose."
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "findings": 5,
+    "by_rule": {
+      "auth_login_pii_in_logs": 2,
+      "tx_amount_account_in_logs": 2,
+      "session_logout_account_in_logs": 1
+    },
+    "by_condition": {
+      "Condition 7 — Security safeguards": 5,
+      "Condition 3 — Purpose specification": 5
+    }
+  }
+}
