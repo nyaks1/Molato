@@ -1,6 +1,6 @@
 {
   "case": "Molato — The Docket",
-  "generated_at": "2026-09-20T11:12:47.105892+00:00",
+  "generated_at": "2026-09-21T07:13:57.414606+00:00",
   "source": "detector/fixtures/sample_logcat.txt",
   "owasp": "OWASP Mobile Top 10 — M6: Inadequate Privacy Controls",
   "popia_source": "Protection of Personal Information Act 4 of 2013 (South Africa)",

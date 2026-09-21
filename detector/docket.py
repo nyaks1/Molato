@@ -12,6 +12,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = REPO_ROOT / "docket.json"
+DEFAULT_MD_OUTPUT = REPO_ROOT / "DOCKET.md"
 OFFENSE_FILE = "app/lib/services/insecure_logger.dart"
 
 POPIA_CONDITION_7 = {
@@ -166,6 +167,65 @@ def build_docket(text: str, source: str) -> dict:
     }
 
 
+def render_markdown(docket: dict) -> str:
+    lines: list[str] = []
+    lines.append("# The Docket")
+    lines.append("")
+    lines.append(f"**Case:** {docket['case']}")
+    lines.append(f"**Generated:** {docket['generated_at']}")
+    lines.append(f"**Source:** `{docket['source']}`")
+    lines.append(f"**Framework:** {docket['owasp']}")
+    lines.append(f"**Law:** {docket['popia_source']}")
+    lines.append("")
+    lines.append("## Charge sheet")
+    lines.append("")
+    summary = docket["summary"]
+    lines.append(f"**Findings:** {summary['findings']}")
+    lines.append("")
+    lines.append("| Rule | Count |")
+    lines.append("|---|---|")
+    for rule, count in sorted(summary["by_rule"].items()):
+        lines.append(f"| `{rule}` | {count} |")
+    lines.append("")
+    lines.append("| POPIA condition | Findings |")
+    lines.append("|---|---|")
+    for condition, count in sorted(summary["by_condition"].items()):
+        lines.append(f"| {condition} | {count} |")
+    lines.append("")
+    lines.append("## Findings")
+    lines.append("")
+    if not docket["findings"]:
+        lines.append("_No planted PII leaks matched. Run the app, trigger login/tx/logout, scan again._")
+        lines.append("")
+        return "\n".join(lines)
+
+    for finding in docket["findings"]:
+        offense = finding["offense"]
+        lines.append(
+            f"### #{finding['id']} `{finding['rule']}` "
+            f"({finding['severity']})"
+        )
+        lines.append("")
+        lines.append(f"- **Log line:** {finding['log_line']}")
+        lines.append(
+            f"- **Offense:** `{offense['file']}:{offense['line']}` — {offense['description']}"
+        )
+        lines.append(f"- **OWASP:** {finding['owasp']}")
+        extracted = ", ".join(f"`{k}={v}`" for k, v in finding["extracted"].items())
+        lines.append(f"- **Extracted PII:** {extracted}")
+        lines.append(f"- **Evidence:** `{finding['evidence']}`")
+        lines.append("")
+        lines.append("**POPIA violations**")
+        lines.append("")
+        for popia in finding["popia"]:
+            lines.append(
+                f"- **{popia['condition']}** (`{popia['section']}`) — {popia['why_broken']}"
+            )
+            lines.append(f"  - Citation: {popia['citation']}")
+        lines.append("")
+    return "\n".join(lines)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Molato POPIA violation detector")
     parser.add_argument(
@@ -179,6 +239,11 @@ def main(argv: list[str] | None = None) -> int:
         "-o",
         default=str(DEFAULT_OUTPUT),
         help=f"Path to docket.json (default: {DEFAULT_OUTPUT})",
+    )
+    parser.add_argument(
+        "--md-output",
+        default=str(DEFAULT_MD_OUTPUT),
+        help=f"Path to DOCKET.md (default: {DEFAULT_MD_OUTPUT})",
     )
     args = parser.parse_args(argv)
 
@@ -195,7 +260,11 @@ def main(argv: list[str] | None = None) -> int:
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(docket, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
+    md_output = Path(args.md_output)
+    md_output.write_text(render_markdown(docket), encoding="utf-8")
+
     print(f"Docket written: {output}")
+    print(f"Charge sheet:   {md_output}")
     print(f"Findings: {docket['summary']['findings']}")
     for rule, count in sorted(docket["summary"]["by_rule"].items()):
         print(f"  - {rule}: {count}")
