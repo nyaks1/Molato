@@ -516,6 +516,18 @@ def main(argv: list[str] | None = None) -> int:
     debt = docket.get("debt_total", {})
     if debt:
         print(f"Debt: {debt.get('one_liner', '')}")
+    if docket["findings"]:
+        sample = docket["findings"][0]
+        print("")
+        print(f"Sample citation (#{sample['id']} {sample['rule']}):")
+        print(f"  offense: {sample['offense']['file']}:{sample['offense']['line']}")
+        for popia in sample["popia"]:
+            print(f"  [{popia['condition']}]")
+            print(f"    section: {popia['section']}")
+            print(f"    text:    {popia['citation'][:120]}…")
+            print(f"    read:    {popia.get('url', POPIA_SITE)}")
+        print(f"  full sheet: {md_output}")
+    print(f"Read the Act: {POPIA_SITE}")
     return 0
 
 
