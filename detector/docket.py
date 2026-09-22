@@ -36,6 +36,41 @@ POPIA_CONDITION_3 = {
     ),
 }
 
+# Act 4 of 2013 penalties — do not invent amounts. s.109 ceiling is statutory.
+PENALTY_ADMIN_FINE_CEILING_ZAR = 10_000_000
+PENALTY_ADMIN_FINE = {
+    "label": "Administrative fine ceiling",
+    "section": "s.109(2)(c)",
+    "citation": (
+        "…the amount of the administrative fine payable, which amount may, "
+        "subject to subsection (10), not exceed R10 million…"
+    ),
+    "max_zar": PENALTY_ADMIN_FINE_CEILING_ZAR,
+}
+PENALTY_CRIMINAL_ACCOUNT = {
+    "label": "Criminal exposure (account number offences)",
+    "section": "s.105 + s.107(1)(a)",
+    "citation": (
+        "Unlawful processing of a data subject's account number may be an "
+        "offence (s.105); conviction is liable to a fine or imprisonment not "
+        "exceeding 10 years, or both (s.107)."
+    ),
+}
+PENALTY_CIVIL = {
+    "label": "Civil damages",
+    "section": "s.99(1), (3)",
+    "citation": (
+        "A data subject may sue for damages for breach of the Act; a court may "
+        "award damages, aggravated damages, interest and costs "
+        "(just and equitable — uncapped statutory figure)."
+    ),
+    "max_zar": None,
+}
+
+# Teaching tariff only — shapes the "debt clicks" line in demos. NOT a court figure.
+# High = account number + identity/money in logs. Medium = identity in logs only.
+ILLUSTRATIVE_TARIFF_ZAR = {"high": 2_000_000, "medium": 500_000}
+
 RULES = [
     {
         "id": "001",
@@ -138,6 +173,21 @@ def scan_lines(text: str) -> list[dict]:
                             "why_broken": rule["why_c3"],
                         },
                     ],
+                    "exposure": {
+                        "illustrative_zar": ILLUSTRATIVE_TARIFF_ZAR[rule["severity"]]
+                        if rule["severity"] in ILLUSTRATIVE_TARIFF_ZAR
+                        else ILLUSTRATIVE_TARIFF_ZAR["medium"],
+                        "illustrative_basis": (
+                            "Teaching tariff only — not a court-ordered fine"
+                        ),
+                        "statutory": [
+                            PENALTY_ADMIN_FINE,
+                            PENALTY_CRIMINAL_ACCOUNT
+                            if "accountNumber" in extracted
+                            else PENALTY_CIVIL,
+                            PENALTY_CIVIL,
+                        ],
+                    },
                 }
             )
     return findings
@@ -152,6 +202,7 @@ def build_docket(text: str, source: str) -> dict:
         for popia in finding["popia"]:
             key = popia["condition"]
             by_condition[key] = by_condition.get(key, 0) + 1
+    illustrative_total = sum(f["exposure"]["illustrative_zar"] for f in findings)
     return {
         "case": "Molato — The Docket",
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -163,6 +214,27 @@ def build_docket(text: str, source: str) -> dict:
             "findings": len(findings),
             "by_rule": by_rule,
             "by_condition": by_condition,
+        },
+        "debt_total": {
+            "currency": "ZAR",
+            "illustrative_session_debt_zar": illustrative_total,
+            "illustrative_basis": (
+                "Teaching tariff (high=R2m, medium=R0.5m per finding). "
+                "NOT a court-ordered or statutory per-finding fine."
+            ),
+            "statutory_admin_fine_ceiling_zar": PENALTY_ADMIN_FINE_CEILING_ZAR,
+            "statutory_admin_fine_note": (
+                "s.109(2)(c): administrative fine may not exceed R10 million "
+                "per infringement notice — ceiling is NOT multiplied by finding count."
+            ),
+            "criminal_exposure": PENALTY_CRIMINAL_ACCOUNT["citation"],
+            "civil_exposure": PENALTY_CIVIL["citation"],
+            "one_liner": (
+                f"{len(findings)} leaks booked · "
+                f"illustrative session debt R{illustrative_total:,.0f} · "
+                f"statutory admin fine ceiling R{PENALTY_ADMIN_FINE_CEILING_ZAR:,.0f} · "
+                "civil claims open · account-number offences up to 10 years"
+            ),
         },
     }
 
@@ -192,6 +264,32 @@ def render_markdown(docket: dict) -> str:
     for condition, count in sorted(summary["by_condition"].items()):
         lines.append(f"| {condition} | {count} |")
     lines.append("")
+    debt = docket.get("debt_total", {})
+    if debt:
+        lines.append("## Debt total (what Molato means)")
+        lines.append("")
+        lines.append(f"**{debt.get('one_liner', '')}**")
+        lines.append("")
+        lines.append("| Line | ZAR | Basis |")
+        lines.append("|---|---|---|")
+        lines.append(
+            f"| Illustrative session debt | "
+            f"R{debt.get('illustrative_session_debt_zar', 0):,.0f} | "
+            f"{debt.get('illustrative_basis', '')} |"
+        )
+        lines.append(
+            f"| Statutory admin fine ceiling | "
+            f"R{debt.get('statutory_admin_fine_ceiling_zar', 0):,.0f} | "
+            f"s.109(2)(c) — not multiplied by finding count |"
+        )
+        lines.append("| Civil damages (s.99) | uncapped | just and equitable + aggravated damages |")
+        lines.append("| Criminal (s.105 + s.107) | fine and/or ≤10 years | serious/persistent account-number offences |")
+        lines.append("")
+        lines.append(
+            "_Illustrative tariff is a teaching price so the debt is felt in Rand. "
+            "Statutory ceilings come from Act 4 of 2013. Not legal advice._"
+        )
+        lines.append("")
     lines.append("## Findings")
     lines.append("")
     if not docket["findings"]:
@@ -213,6 +311,20 @@ def render_markdown(docket: dict) -> str:
         lines.append(f"- **OWASP:** {finding['owasp']}")
         extracted = ", ".join(f"`{k}={v}`" for k, v in finding["extracted"].items())
         lines.append(f"- **Extracted PII:** {extracted}")
+        exposure = finding.get("exposure", {})
+        if exposure:
+            lines.append(
+                f"- **Exposure:** illustrative R{exposure.get('illustrative_zar', 0):,.0f} "
+                f"({exposure.get('illustrative_basis', '')})"
+            )
+            for stat in exposure.get("statutory", []):
+                max_zar = stat.get("max_zar")
+                ceiling = (
+                    f" — ceiling R{max_zar:,.0f}" if max_zar is not None else ""
+                )
+                lines.append(
+                    f"  - **{stat['label']}** (`{stat['section']}`){ceiling}"
+                )
         lines.append(f"- **Evidence:** `{finding['evidence']}`")
         lines.append("")
         lines.append("**POPIA violations**")
@@ -270,6 +382,9 @@ def main(argv: list[str] | None = None) -> int:
         print(f"  - {rule}: {count}")
     for condition, count in sorted(docket["summary"]["by_condition"].items()):
         print(f"  - {condition}: {count}")
+    debt = docket.get("debt_total", {})
+    if debt:
+        print(f"Debt: {debt.get('one_liner', '')}")
     return 0
 
 

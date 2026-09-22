@@ -34,6 +34,16 @@ Citations from **Protection of Personal Information Act 4 of 2013** (gov.za). Co
 | Condition 7 — Security safeguards | s.19(1) | PII persisted in plaintext logs | `docket.json` / `DOCKET.md` findings |
 | Condition 3 — Purpose specification | s.13(1) | Logged fields exceed what the feature needs | `docket.json` / `DOCKET.md` findings |
 
+### Debt (penalties priced from the Act)
+
+| Exposure | Section | Ceiling |
+|---|---|---|
+| Administrative fine | s.109(2)(c) | **R10 000 000** per infringement notice (not × findings) |
+| Criminal (account number offences) | s.105 + s.107 | fine and/or **≤ 10 years** |
+| Civil damages | s.99 | just and equitable — uncapped figure |
+
+`DOCKET.md` also prints an **illustrative session debt** (teaching tariff: high R2m / medium R0.5m per leak) so the debt is felt in Rand. Label it teaching-only in the demo — do not call it a court fine.
+
 Human-readable charge sheet is **generated** by `detector/docket.py` → `DOCKET.md` (do not hand-edit).
 
 ## POPIA standing gate
@@ -98,7 +108,7 @@ Expected Logcat offense lines:
 1. **Problem (10s):** Mobile fintech apps leak PII into device logs. OWASP M6. Every leak is unpaid privacy debt. POPIA Condition 7.
 2. **Villain (10s):** `InsecureLogger` — bare `print()` of name + account + amount. That's how the debt is incurred.
 3. **Debt scene (20s):** Android Studio Logcat shows the three leak lines after login / send / logout.
-4. **Hero (30s):** `bash detector/run.sh` → open `DOCKET.md` — a ledger of what you owe, citing Condition 7 (s.19) and Condition 3 (s.13) with the exact file:line.
+4. **Hero (30s):** `bash detector/run.sh` → open `DOCKET.md` — a debt ledger in Rand: illustrative session debt + statutory ceiling **R10 000 000** (s.109) + civil claims (s.99) + account-number offences up to 10 years (s.105/107). Cites Condition 7 (s.19) and Condition 3 (s.13) with file:line.
 5. **Why now / ask (20s):** Same pattern exists in real apps. The Docket is the shovel: turn logs into a debt ledger you can actually settle.
 
 📺 Demo video — unlisted YouTube, 5–10 min (link here once recorded)

@@ -51,6 +51,16 @@ assert "Condition 3 — Purpose specification" in md
 assert "s.19(1)" in md
 assert "s.13(1)" in md
 
+debt = docket.get("debt_total", {})
+assert debt.get("statutory_admin_fine_ceiling_zar") == 10_000_000
+assert "R10" in md or "10,000,000" in md or "10 000 000" in md or "R10 million" in md or "10,000,000" in md.replace(" ", "")
+assert "Debt total" in md
+assert "s.109" in md or "s.109" in json.dumps(docket)
+assert debt.get("illustrative_session_debt_zar", 0) > 0
+for f in docket["findings"]:
+    assert f["exposure"]["illustrative_zar"] in (2_000_000, 500_000)
+    assert f["exposure"]["statutory"]
+
 for f in docket["findings"]:
     conds = {p["condition"] for p in f["popia"]}
     assert any("Condition 7" in c for c in conds), f

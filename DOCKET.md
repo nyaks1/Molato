@@ -1,7 +1,7 @@
 # The Docket
 
 **Case:** Molato — The Docket
-**Generated:** 2026-09-21T07:13:57.414606+00:00
+**Generated:** 2026-09-22T15:10:28.134001+00:00
 **Source:** `detector/fixtures/sample_logcat.txt`
 **Framework:** OWASP Mobile Top 10 — M6: Inadequate Privacy Controls
 **Law:** Protection of Personal Information Act 4 of 2013 (South Africa)
@@ -21,6 +21,19 @@
 | Condition 3 — Purpose specification | 5 |
 | Condition 7 — Security safeguards | 5 |
 
+## Debt total (what Molato means)
+
+**5 leaks booked · illustrative session debt R8,500,000 · statutory admin fine ceiling R10,000,000 · civil claims open · account-number offences up to 10 years**
+
+| Line | ZAR | Basis |
+|---|---|---|
+| Illustrative session debt | R8,500,000 | Teaching tariff (high=R2m, medium=R0.5m per finding). NOT a court-ordered or statutory per-finding fine. |
+| Statutory admin fine ceiling | R10,000,000 | s.109(2)(c) — not multiplied by finding count |
+| Civil damages (s.99) | uncapped | just and equitable + aggravated damages |
+| Criminal (s.105 + s.107) | fine and/or ≤10 years | serious/persistent account-number offences |
+
+_Illustrative tariff is a teaching price so the debt is felt in Rand. Statutory ceilings come from Act 4 of 2013. Not legal advice._
+
 ## Findings
 
 ### #001 `auth_login_pii_in_logs` (high)
@@ -29,6 +42,10 @@
 - **Offense:** `app/lib/services/insecure_logger.dart:6` — Login success log writes name, email and account number to device logs
 - **OWASP:** M6: Inadequate Privacy Controls — sensitive data in logs
 - **Extracted PII:** `fullName=Neo Serame`, `email=neo.serame@demo.molato.local`, `accountNumber=10098765432`
+- **Exposure:** illustrative R2,000,000 (Teaching tariff only — not a court-ordered fine)
+  - **Administrative fine ceiling** (`s.109(2)(c)`) — ceiling R10,000,000
+  - **Criminal exposure (account number offences)** (`s.105 + s.107(1)(a)`)
+  - **Civil damages** (`s.99(1), (3)`)
 - **Evidence:** `09-19 08:40:03.440  9999  9999 I flutter : [AUTH] login success user=Neo Serame email=neo.serame@demo.molato.local account=10098765432`
 
 **POPIA violations**
@@ -44,6 +61,10 @@
 - **Offense:** `app/lib/services/insecure_logger.dart:16` — Transaction log writes account number, full name and amount to device logs
 - **OWASP:** M6: Inadequate Privacy Controls — sensitive data in logs
 - **Extracted PII:** `fullName=Neo Serame`, `accountNumber=10098765432`, `amount=ZAR450.0`
+- **Exposure:** illustrative R2,000,000 (Teaching tariff only — not a court-ordered fine)
+  - **Administrative fine ceiling** (`s.109(2)(c)`) — ceiling R10,000,000
+  - **Criminal exposure (account number offences)** (`s.105 + s.107(1)(a)`)
+  - **Civil damages** (`s.99(1), (3)`)
 - **Evidence:** `09-19 08:40:05.880  9999  9999 I flutter : [TX] processed for Neo Serame | account=10098765432 | amount=ZAR450.0`
 
 **POPIA violations**
@@ -59,6 +80,10 @@
 - **Offense:** `app/lib/services/insecure_logger.dart:16` — Transaction log writes account number, full name and amount to device logs
 - **OWASP:** M6: Inadequate Privacy Controls — sensitive data in logs
 - **Extracted PII:** `fullName=Neo Serame`, `accountNumber=10098765432`, `amount=ZAR120.5`
+- **Exposure:** illustrative R2,000,000 (Teaching tariff only — not a court-ordered fine)
+  - **Administrative fine ceiling** (`s.109(2)(c)`) — ceiling R10,000,000
+  - **Criminal exposure (account number offences)** (`s.105 + s.107(1)(a)`)
+  - **Civil damages** (`s.99(1), (3)`)
 - **Evidence:** `09-19 08:40:06.200  9999  9999 I flutter : [TX] processed for Neo Serame | account=10098765432 | amount=ZAR120.5`
 
 **POPIA violations**
@@ -74,6 +99,10 @@
 - **Offense:** `app/lib/services/insecure_logger.dart:21` — Logout log still writes account number and full name to device logs
 - **OWASP:** M6: Inadequate Privacy Controls — sensitive data in logs
 - **Extracted PII:** `accountNumber=10098765432`, `fullName=Neo Serame`
+- **Exposure:** illustrative R500,000 (Teaching tariff only — not a court-ordered fine)
+  - **Administrative fine ceiling** (`s.109(2)(c)`) — ceiling R10,000,000
+  - **Criminal exposure (account number offences)** (`s.105 + s.107(1)(a)`)
+  - **Civil damages** (`s.99(1), (3)`)
 - **Evidence:** `09-19 08:40:08.300  9999  9999 I flutter : [SESSION] logout account=10098765432 user=Neo Serame`
 
 **POPIA violations**
@@ -89,6 +118,10 @@
 - **Offense:** `app/lib/services/insecure_logger.dart:6` — Login success log writes name, email and account number to device logs
 - **OWASP:** M6: Inadequate Privacy Controls — sensitive data in logs
 - **Extracted PII:** `fullName=Neo Serame`, `email=neo.serame@demo.molato.local`, `accountNumber=10098765432`
+- **Exposure:** illustrative R2,000,000 (Teaching tariff only — not a court-ordered fine)
+  - **Administrative fine ceiling** (`s.109(2)(c)`) — ceiling R10,000,000
+  - **Criminal exposure (account number offences)** (`s.105 + s.107(1)(a)`)
+  - **Civil damages** (`s.99(1), (3)`)
 - **Evidence:** `09-19 08:40:09.001  9999  9999 I flutter : [AUTH] login success user=Neo Serame email=neo.serame@demo.molato.local account=10098765432`
 
 **POPIA violations**
