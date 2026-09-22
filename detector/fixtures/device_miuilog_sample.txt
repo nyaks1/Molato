@@ -1,0 +1,7 @@
+--------- beginning of main
+09-21 10:00:01.000  1234  1234 I ActivityManager: Start proc za.edu.we.thinkcode.molato
+09-21 10:00:02.100 13303 13303 I/flutter (13303): [AUTH] login success user=Neo Serame email=neo.serame@demo.molato.local account=10098765432
+09-21 10:00:03.200 13303 13303 I/MIUIInput(13303): [MotionEvent] ViewRootImpl windowName 'za.edu.we.thinkcode.molato/za.edu.we.thinkcode.molato.MainActivity', { action=ACTION_DOWN, id[0]=0, pointerCount=1, eventTime=206693623, downTime=206693623, phoneEventTime=1790090607883 } moveCount:0
+09-21 10:00:04.300 13303 13303 I/flutter (13303): [TX] processed for Neo Serame | account=10098765432 | amount=ZAR1000.0
+09-21 10:00:05.400 13303 13303 D/FlutterJNI(13303): Sending viewport metrics to the engine.
+09-21 10:00:06.500 13303 13303 I/flutter (13303): [SESSION] logout account=10098765432 user=Neo Serame
