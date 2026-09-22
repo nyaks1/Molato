@@ -1,11 +1,11 @@
 {
   "case": "Molato — The Docket",
-  "generated_at": "2026-09-22T15:38:28.890417+00:00",
+  "generated_at": "2026-09-22T15:39:14.848895+00:00",
   "source": "detector/fixtures/sample_logcat.txt",
   "owasp": "OWASP Mobile Top 10 — M6: Inadequate Privacy Controls",
   "popia_source": "Protection of Personal Information Act 4 of 2013 (South Africa)",
   "popia_read_more": {
-    "site": "popia.co.za — POPI Act as enacted, reformat­ted as a website",
+    "site": "popia.co.za — POPI Act as enacted, reformatted as a website",
     "home": "https://popia.co.za/",
     "note": "popia.co.za lists these under Chapter 3 Conditions for Lawful Processing (Condition 3 / Condition 7) and Chapter 11 Offences, Penalties and Administrative Fines (ss. 105, 107, 109). s.99 Civil remedies sits under Chapter 10 Enforcement."
   },

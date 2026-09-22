@@ -17,7 +17,7 @@ OFFENSE_FILE = "app/lib/services/insecure_logger.dart"
 
 # How popia.co.za titles and links these parts (navigation, Chapter 3 / 10 / 11).
 POPIA_SITE = "https://popia.co.za/"
-POPIA_SITE_NAME = "popia.co.za — POPI Act as enacted, reformat­ted as a website"
+POPIA_SITE_NAME = "popia.co.za — POPI Act as enacted, reformatted as a website"
 
 URL_CONDITION_3 = (
     "https://popia.co.za/protection-of-personal-information-act-popia/"

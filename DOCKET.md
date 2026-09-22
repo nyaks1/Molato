@@ -1,11 +1,11 @@
 # The Docket
 
 **Case:** Molato — The Docket
-**Generated:** 2026-09-22T15:38:28.890417+00:00
+**Generated:** 2026-09-22T15:39:14.848895+00:00
 **Source:** `detector/fixtures/sample_logcat.txt`
 **Framework:** OWASP Mobile Top 10 — M6: Inadequate Privacy Controls
 **Law:** Protection of Personal Information Act 4 of 2013 (South Africa)
-**Read more:** [popia.co.za — POPI Act as enacted, reformat­ted as a website](https://popia.co.za/)
+**Read more:** [popia.co.za — POPI Act as enacted, reformatted as a website](https://popia.co.za/)
 _popia.co.za lists these under Chapter 3 Conditions for Lawful Processing (Condition 3 / Condition 7) and Chapter 11 Offences, Penalties and Administrative Fines (ss. 105, 107, 109). s.99 Civil remedies sits under Chapter 10 Enforcement._
 
 ## Charge sheet
@@ -38,7 +38,7 @@ _Illustrative tariff is a teaching price so the debt is felt in Rand. Statutory 
 
 ### Read the Act online
 
-Readable site for the enacted POPI Act: **[popia.co.za — POPI Act as enacted, reformat­ted as a website](https://popia.co.za/)** (not the Information Regulator). How our citations appear there:
+Readable site for the enacted POPI Act: **[popia.co.za — POPI Act as enacted, reformatted as a website](https://popia.co.za/)** (not the Information Regulator). How our citations appear there:
 
 | How it appears on popia.co.za | Molato uses | Link |
 |---|---|---|
