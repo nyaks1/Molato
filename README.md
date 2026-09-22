@@ -2,7 +2,7 @@
 
 WTC-SULJLKF2
 
-Molato (Setswana: offense / fault / case) — a deliberately vulnerable Flutter fintech app paired with a detector that turns every privacy leak into The Docket: a charge sheet mapping each violation to the exact POPIA section it breaks.
+Molato (Setswana: **debt** / what is owed) — a deliberately vulnerable Flutter fintech app paired with a detector that turns every privacy leak into The Docket: a ledger mapping each violation to the exact POPIA section you now owe on.
 
 ## What this is
 
@@ -11,7 +11,7 @@ Two parts, one story:
 - **The Offense** — `/app` — a small Flutter fintech demo that deliberately leaks PII (name, account number, transaction amount) into device logs. OWASP Mobile Top 10 — **M6: Inadequate Privacy Controls**.
 - **The Docket** — `/detector` — Python + Bash that reads device logs, flags every leak, and writes `docket.json` + `DOCKET.md`, each finding mapped to the POPIA condition it breaks.
 
-The point isn't "here's a vulnerable app." The point is: here's proof I can find the offense and write the case against it.
+The point isn't "here's a vulnerable app." The point is: every leak is a privacy **debt**. The Docket is the ledger — proof I can find what you owe and cite the law that says you owe it.
 
 ## Why it exists
 
@@ -95,11 +95,11 @@ Expected Logcat offense lines:
 
 ## Demo (90 seconds live path)
 
-1. **Problem (10s):** Mobile fintech apps leak PII into device logs. OWASP M6. POPIA Condition 7.
-2. **Villain (10s):** `InsecureLogger` — bare `print()` of name + account + amount.
-3. **Crime scene (20s):** Android Studio Logcat shows the three leak lines after login / send / logout.
-4. **Hero (30s):** `bash detector/run.sh` → open `DOCKET.md` — each finding cites Condition 7 (s.19) and Condition 3 (s.13) with the exact offense file:line.
-5. **Why now / ask (20s):** Same pattern exists in real apps. The Docket is the shovel: turn logs into a legal charge sheet automatically.
+1. **Problem (10s):** Mobile fintech apps leak PII into device logs. OWASP M6. Every leak is unpaid privacy debt. POPIA Condition 7.
+2. **Villain (10s):** `InsecureLogger` — bare `print()` of name + account + amount. That's how the debt is incurred.
+3. **Debt scene (20s):** Android Studio Logcat shows the three leak lines after login / send / logout.
+4. **Hero (30s):** `bash detector/run.sh` → open `DOCKET.md` — a ledger of what you owe, citing Condition 7 (s.19) and Condition 3 (s.13) with the exact file:line.
+5. **Why now / ask (20s):** Same pattern exists in real apps. The Docket is the shovel: turn logs into a debt ledger you can actually settle.
 
 📺 Demo video — unlisted YouTube, 5–10 min (link here once recorded)
 
