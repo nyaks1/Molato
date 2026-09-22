@@ -1,9 +1,14 @@
 {
   "case": "Molato — The Docket",
-  "generated_at": "2026-09-22T15:10:28.134001+00:00",
+  "generated_at": "2026-09-22T15:38:28.890417+00:00",
   "source": "detector/fixtures/sample_logcat.txt",
   "owasp": "OWASP Mobile Top 10 — M6: Inadequate Privacy Controls",
   "popia_source": "Protection of Personal Information Act 4 of 2013 (South Africa)",
+  "popia_read_more": {
+    "site": "popia.co.za — POPI Act as enacted, reformat­ted as a website",
+    "home": "https://popia.co.za/",
+    "note": "popia.co.za lists these under Chapter 3 Conditions for Lawful Processing (Condition 3 / Condition 7) and Chapter 11 Offences, Penalties and Administrative Fines (ss. 105, 107, 109). s.99 Civil remedies sits under Chapter 10 Enforcement."
+  },
   "findings": [
     {
       "id": "001",
@@ -26,12 +31,20 @@
         {
           "condition": "Condition 7 — Security safeguards",
           "section": "s.19(1)",
+          "as_listed_on_popia_co_za": "Condition 7 Security safeguards",
+          "url": "https://popia.co.za/protection-of-personal-information-act-popia/chapter-3-2/chapter-3/condition-7-security-safeguards/",
+          "section_as_listed_on_popia_co_za": "Section 19 Security measures on integrity and confidentiality of personal information",
+          "section_url": "https://popia.co.za/section-19-security-measures-on-integrity-and-confidentiality-of-personal-information/",
           "citation": "A responsible party must secure the integrity and confidentiality of personal information in its possession or under its control by taking appropriate, reasonable technical and organisational measures to prevent— ... (b) unlawful access to or processing of personal information.",
           "why_broken": "Raw personal information is persisted in a log buffer with no access control, redaction, or integrity protection."
         },
         {
           "condition": "Condition 3 — Purpose specification",
           "section": "s.13(1)",
+          "as_listed_on_popia_co_za": "Condition 3 Purpose specification",
+          "url": "https://popia.co.za/protection-of-personal-information-act-popia/chapter-3-2/chapter-3/condition-3-purpose-specification/",
+          "section_as_listed_on_popia_co_za": "Section 13 Collection for specific purpose",
+          "section_url": "https://popia.co.za/section-13-collection-for-specific-purpose/",
           "citation": "Personal information must be collected for a specific, explicitly defined and lawful purpose related to a function or activity of the responsible party.",
           "why_broken": "Authentication UI only needs a session flag; logging full identity + account number exceeds that purpose."
         }
@@ -43,17 +56,24 @@
           {
             "label": "Administrative fine ceiling",
             "section": "s.109(2)(c)",
+            "as_listed_on_popia_co_za": "Section 109 Administrative fines",
+            "url": "https://popia.co.za/section-109-administrative-fines/",
             "citation": "…the amount of the administrative fine payable, which amount may, subject to subsection (10), not exceed R10 million…",
             "max_zar": 10000000
           },
           {
             "label": "Criminal exposure (account number offences)",
             "section": "s.105 + s.107(1)(a)",
+            "as_listed_on_popia_co_za": "Section 105 Unlawful acts by responsible party in connection with account number; Section 107 Penalties",
+            "url": "https://popia.co.za/section-105-unlawful-acts-by-responsible-party-in-connection-with-account-number/",
+            "url_alt": "https://popia.co.za/section-107-penalties/",
             "citation": "Unlawful processing of a data subject's account number may be an offence (s.105); conviction is liable to a fine or imprisonment not exceeding 10 years, or both (s.107)."
           },
           {
             "label": "Civil damages",
             "section": "s.99(1), (3)",
+            "as_listed_on_popia_co_za": "Section 99 Civil remedies",
+            "url": "https://popia.co.za/section-99-civil-remedies/",
             "citation": "A data subject may sue for damages for breach of the Act; a court may award damages, aggravated damages, interest and costs (just and equitable — uncapped statutory figure).",
             "max_zar": null
           }
@@ -81,12 +101,20 @@
         {
           "condition": "Condition 7 — Security safeguards",
           "section": "s.19(1)",
+          "as_listed_on_popia_co_za": "Condition 7 Security safeguards",
+          "url": "https://popia.co.za/protection-of-personal-information-act-popia/chapter-3-2/chapter-3/condition-7-security-safeguards/",
+          "section_as_listed_on_popia_co_za": "Section 19 Security measures on integrity and confidentiality of personal information",
+          "section_url": "https://popia.co.za/section-19-security-measures-on-integrity-and-confidentiality-of-personal-information/",
           "citation": "A responsible party must secure the integrity and confidentiality of personal information in its possession or under its control by taking appropriate, reasonable technical and organisational measures to prevent— ... (b) unlawful access to or processing of personal information.",
           "why_broken": "Financial personal information is written in plaintext and can be read by anyone with log access (adb, MDM, bugreports)."
         },
         {
           "condition": "Condition 3 — Purpose specification",
           "section": "s.13(1)",
+          "as_listed_on_popia_co_za": "Condition 3 Purpose specification",
+          "url": "https://popia.co.za/protection-of-personal-information-act-popia/chapter-3-2/chapter-3/condition-3-purpose-specification/",
+          "section_as_listed_on_popia_co_za": "Section 13 Collection for specific purpose",
+          "section_url": "https://popia.co.za/section-13-collection-for-specific-purpose/",
           "citation": "Personal information must be collected for a specific, explicitly defined and lawful purpose related to a function or activity of the responsible party.",
           "why_broken": "Showing a confirmation snackbar needs an amount, not the user's account number and legal name in logs."
         }
@@ -98,17 +126,24 @@
           {
             "label": "Administrative fine ceiling",
             "section": "s.109(2)(c)",
+            "as_listed_on_popia_co_za": "Section 109 Administrative fines",
+            "url": "https://popia.co.za/section-109-administrative-fines/",
             "citation": "…the amount of the administrative fine payable, which amount may, subject to subsection (10), not exceed R10 million…",
             "max_zar": 10000000
           },
           {
             "label": "Criminal exposure (account number offences)",
             "section": "s.105 + s.107(1)(a)",
+            "as_listed_on_popia_co_za": "Section 105 Unlawful acts by responsible party in connection with account number; Section 107 Penalties",
+            "url": "https://popia.co.za/section-105-unlawful-acts-by-responsible-party-in-connection-with-account-number/",
+            "url_alt": "https://popia.co.za/section-107-penalties/",
             "citation": "Unlawful processing of a data subject's account number may be an offence (s.105); conviction is liable to a fine or imprisonment not exceeding 10 years, or both (s.107)."
           },
           {
             "label": "Civil damages",
             "section": "s.99(1), (3)",
+            "as_listed_on_popia_co_za": "Section 99 Civil remedies",
+            "url": "https://popia.co.za/section-99-civil-remedies/",
             "citation": "A data subject may sue for damages for breach of the Act; a court may award damages, aggravated damages, interest and costs (just and equitable — uncapped statutory figure).",
             "max_zar": null
           }
@@ -136,12 +171,20 @@
         {
           "condition": "Condition 7 — Security safeguards",
           "section": "s.19(1)",
+          "as_listed_on_popia_co_za": "Condition 7 Security safeguards",
+          "url": "https://popia.co.za/protection-of-personal-information-act-popia/chapter-3-2/chapter-3/condition-7-security-safeguards/",
+          "section_as_listed_on_popia_co_za": "Section 19 Security measures on integrity and confidentiality of personal information",
+          "section_url": "https://popia.co.za/section-19-security-measures-on-integrity-and-confidentiality-of-personal-information/",
           "citation": "A responsible party must secure the integrity and confidentiality of personal information in its possession or under its control by taking appropriate, reasonable technical and organisational measures to prevent— ... (b) unlawful access to or processing of personal information.",
           "why_broken": "Financial personal information is written in plaintext and can be read by anyone with log access (adb, MDM, bugreports)."
         },
         {
           "condition": "Condition 3 — Purpose specification",
           "section": "s.13(1)",
+          "as_listed_on_popia_co_za": "Condition 3 Purpose specification",
+          "url": "https://popia.co.za/protection-of-personal-information-act-popia/chapter-3-2/chapter-3/condition-3-purpose-specification/",
+          "section_as_listed_on_popia_co_za": "Section 13 Collection for specific purpose",
+          "section_url": "https://popia.co.za/section-13-collection-for-specific-purpose/",
           "citation": "Personal information must be collected for a specific, explicitly defined and lawful purpose related to a function or activity of the responsible party.",
           "why_broken": "Showing a confirmation snackbar needs an amount, not the user's account number and legal name in logs."
         }
@@ -153,17 +196,24 @@
           {
             "label": "Administrative fine ceiling",
             "section": "s.109(2)(c)",
+            "as_listed_on_popia_co_za": "Section 109 Administrative fines",
+            "url": "https://popia.co.za/section-109-administrative-fines/",
             "citation": "…the amount of the administrative fine payable, which amount may, subject to subsection (10), not exceed R10 million…",
             "max_zar": 10000000
           },
           {
             "label": "Criminal exposure (account number offences)",
             "section": "s.105 + s.107(1)(a)",
+            "as_listed_on_popia_co_za": "Section 105 Unlawful acts by responsible party in connection with account number; Section 107 Penalties",
+            "url": "https://popia.co.za/section-105-unlawful-acts-by-responsible-party-in-connection-with-account-number/",
+            "url_alt": "https://popia.co.za/section-107-penalties/",
             "citation": "Unlawful processing of a data subject's account number may be an offence (s.105); conviction is liable to a fine or imprisonment not exceeding 10 years, or both (s.107)."
           },
           {
             "label": "Civil damages",
             "section": "s.99(1), (3)",
+            "as_listed_on_popia_co_za": "Section 99 Civil remedies",
+            "url": "https://popia.co.za/section-99-civil-remedies/",
             "citation": "A data subject may sue for damages for breach of the Act; a court may award damages, aggravated damages, interest and costs (just and equitable — uncapped statutory figure).",
             "max_zar": null
           }
@@ -190,12 +240,20 @@
         {
           "condition": "Condition 7 — Security safeguards",
           "section": "s.19(1)",
+          "as_listed_on_popia_co_za": "Condition 7 Security safeguards",
+          "url": "https://popia.co.za/protection-of-personal-information-act-popia/chapter-3-2/chapter-3/condition-7-security-safeguards/",
+          "section_as_listed_on_popia_co_za": "Section 19 Security measures on integrity and confidentiality of personal information",
+          "section_url": "https://popia.co.za/section-19-security-measures-on-integrity-and-confidentiality-of-personal-information/",
           "citation": "A responsible party must secure the integrity and confidentiality of personal information in its possession or under its control by taking appropriate, reasonable technical and organisational measures to prevent— ... (b) unlawful access to or processing of personal information.",
           "why_broken": "Session teardown re-exposes identifiers that should leave the device memory path with the session, not land in logs."
         },
         {
           "condition": "Condition 3 — Purpose specification",
           "section": "s.13(1)",
+          "as_listed_on_popia_co_za": "Condition 3 Purpose specification",
+          "url": "https://popia.co.za/protection-of-personal-information-act-popia/chapter-3-2/chapter-3/condition-3-purpose-specification/",
+          "section_as_listed_on_popia_co_za": "Section 13 Collection for specific purpose",
+          "section_url": "https://popia.co.za/section-13-collection-for-specific-purpose/",
           "citation": "Personal information must be collected for a specific, explicitly defined and lawful purpose related to a function or activity of the responsible party.",
           "why_broken": "Logout needs no PII; the app's purpose at that step is only to clear local session state."
         }
@@ -207,17 +265,24 @@
           {
             "label": "Administrative fine ceiling",
             "section": "s.109(2)(c)",
+            "as_listed_on_popia_co_za": "Section 109 Administrative fines",
+            "url": "https://popia.co.za/section-109-administrative-fines/",
             "citation": "…the amount of the administrative fine payable, which amount may, subject to subsection (10), not exceed R10 million…",
             "max_zar": 10000000
           },
           {
             "label": "Criminal exposure (account number offences)",
             "section": "s.105 + s.107(1)(a)",
+            "as_listed_on_popia_co_za": "Section 105 Unlawful acts by responsible party in connection with account number; Section 107 Penalties",
+            "url": "https://popia.co.za/section-105-unlawful-acts-by-responsible-party-in-connection-with-account-number/",
+            "url_alt": "https://popia.co.za/section-107-penalties/",
             "citation": "Unlawful processing of a data subject's account number may be an offence (s.105); conviction is liable to a fine or imprisonment not exceeding 10 years, or both (s.107)."
           },
           {
             "label": "Civil damages",
             "section": "s.99(1), (3)",
+            "as_listed_on_popia_co_za": "Section 99 Civil remedies",
+            "url": "https://popia.co.za/section-99-civil-remedies/",
             "citation": "A data subject may sue for damages for breach of the Act; a court may award damages, aggravated damages, interest and costs (just and equitable — uncapped statutory figure).",
             "max_zar": null
           }
@@ -245,12 +310,20 @@
         {
           "condition": "Condition 7 — Security safeguards",
           "section": "s.19(1)",
+          "as_listed_on_popia_co_za": "Condition 7 Security safeguards",
+          "url": "https://popia.co.za/protection-of-personal-information-act-popia/chapter-3-2/chapter-3/condition-7-security-safeguards/",
+          "section_as_listed_on_popia_co_za": "Section 19 Security measures on integrity and confidentiality of personal information",
+          "section_url": "https://popia.co.za/section-19-security-measures-on-integrity-and-confidentiality-of-personal-information/",
           "citation": "A responsible party must secure the integrity and confidentiality of personal information in its possession or under its control by taking appropriate, reasonable technical and organisational measures to prevent— ... (b) unlawful access to or processing of personal information.",
           "why_broken": "Raw personal information is persisted in a log buffer with no access control, redaction, or integrity protection."
         },
         {
           "condition": "Condition 3 — Purpose specification",
           "section": "s.13(1)",
+          "as_listed_on_popia_co_za": "Condition 3 Purpose specification",
+          "url": "https://popia.co.za/protection-of-personal-information-act-popia/chapter-3-2/chapter-3/condition-3-purpose-specification/",
+          "section_as_listed_on_popia_co_za": "Section 13 Collection for specific purpose",
+          "section_url": "https://popia.co.za/section-13-collection-for-specific-purpose/",
           "citation": "Personal information must be collected for a specific, explicitly defined and lawful purpose related to a function or activity of the responsible party.",
           "why_broken": "Authentication UI only needs a session flag; logging full identity + account number exceeds that purpose."
         }
@@ -262,17 +335,24 @@
           {
             "label": "Administrative fine ceiling",
             "section": "s.109(2)(c)",
+            "as_listed_on_popia_co_za": "Section 109 Administrative fines",
+            "url": "https://popia.co.za/section-109-administrative-fines/",
             "citation": "…the amount of the administrative fine payable, which amount may, subject to subsection (10), not exceed R10 million…",
             "max_zar": 10000000
           },
           {
             "label": "Criminal exposure (account number offences)",
             "section": "s.105 + s.107(1)(a)",
+            "as_listed_on_popia_co_za": "Section 105 Unlawful acts by responsible party in connection with account number; Section 107 Penalties",
+            "url": "https://popia.co.za/section-105-unlawful-acts-by-responsible-party-in-connection-with-account-number/",
+            "url_alt": "https://popia.co.za/section-107-penalties/",
             "citation": "Unlawful processing of a data subject's account number may be an offence (s.105); conviction is liable to a fine or imprisonment not exceeding 10 years, or both (s.107)."
           },
           {
             "label": "Civil damages",
             "section": "s.99(1), (3)",
+            "as_listed_on_popia_co_za": "Section 99 Civil remedies",
+            "url": "https://popia.co.za/section-99-civil-remedies/",
             "citation": "A data subject may sue for damages for breach of the Act; a court may award damages, aggravated damages, interest and costs (just and equitable — uncapped statutory figure).",
             "max_zar": null
           }

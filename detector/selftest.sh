@@ -57,6 +57,12 @@ assert "R10" in md or "10,000,000" in md or "10 000 000" in md or "R10 million" 
 assert "Debt total" in md
 assert "s.109" in md or "s.109" in json.dumps(docket)
 assert debt.get("illustrative_session_debt_zar", 0) > 0
+assert "popia.co.za" in md
+assert "https://popia.co.za/section-13-collection-for-specific-purpose/" in md
+assert "https://popia.co.za/section-19-security-measures-on-integrity-and-confidentiality-of-personal-information/" in md
+assert "https://popia.co.za/section-109-administrative-fines/" in md
+assert "Condition 7 Security safeguards" in md
+assert "Condition 3 Purpose specification" in md
 for f in docket["findings"]:
     assert f["exposure"]["illustrative_zar"] in (2_000_000, 500_000)
     assert f["exposure"]["statutory"]

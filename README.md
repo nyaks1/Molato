@@ -27,7 +27,14 @@ Solo proof-of-work for the WeThinkCode_ Cybersecurity elective selection — ori
 
 ## POPIA mapping (from the Act, wired into the detector)
 
-Citations from **Protection of Personal Information Act 4 of 2013** (gov.za). Condition 5 is *Information quality* — purpose lives in Condition 3.
+Citations from **Protection of Personal Information Act 4 of 2013**. Readable source with deep links: [popia.co.za](https://popia.co.za/) — “the POPI Act as enacted … reformatted as a website.” Condition 5 is *Information quality* — purpose lives in Condition 3.
+
+How our two conditions appear on that site (Chapter 3 → Part A):
+
+| popia.co.za listing | Link |
+|---|---|
+| Condition 3 Purpose specification → Section 13 Collection for specific purpose | [condition](https://popia.co.za/protection-of-personal-information-act-popia/chapter-3-2/chapter-3/condition-3-purpose-specification/) · [s.13](https://popia.co.za/section-13-collection-for-specific-purpose/) |
+| Condition 7 Security safeguards → Section 19 Security measures on integrity and confidentiality of personal information | [condition](https://popia.co.za/protection-of-personal-information-act-popia/chapter-3-2/chapter-3/condition-7-security-safeguards/) · [s.19](https://popia.co.za/section-19-security-measures-on-integrity-and-confidentiality-of-personal-information/) |
 
 | Condition | Section | What's broken | Evidence |
 |---|---|---|---|
@@ -36,11 +43,11 @@ Citations from **Protection of Personal Information Act 4 of 2013** (gov.za). Co
 
 ### Debt (penalties priced from the Act)
 
-| Exposure | Section | Ceiling |
-|---|---|---|
-| Administrative fine | s.109(2)(c) | **R10 000 000** per infringement notice (not × findings) |
-| Criminal (account number offences) | s.105 + s.107 | fine and/or **≤ 10 years** |
-| Civil damages | s.99 | just and equitable — uncapped figure |
+| Exposure | Section | Ceiling | popia.co.za |
+|---|---|---|---|
+| Administrative fine | s.109(2)(c) | **R10 000 000** per infringement notice (not × findings) | [Section 109 Administrative fines](https://popia.co.za/section-109-administrative-fines/) |
+| Criminal (account number offences) | s.105 + s.107 | fine and/or **≤ 10 years** | [s.105](https://popia.co.za/section-105-unlawful-acts-by-responsible-party-in-connection-with-account-number/) · [s.107 Penalties](https://popia.co.za/section-107-penalties/) |
+| Civil damages | s.99 | just and equitable — uncapped figure | [Section 99 Civil remedies](https://popia.co.za/section-99-civil-remedies/) |
 
 `DOCKET.md` also prints an **illustrative session debt** (teaching tariff: high R2m / medium R0.5m per leak) so the debt is felt in Rand. Label it teaching-only in the demo — do not call it a court fine.
 
