@@ -118,7 +118,7 @@ Expected Logcat offense lines:
 4. **Hero (30s):** `bash detector/run.sh` → open `DOCKET.md` — a debt ledger in Rand: illustrative session debt + statutory ceiling **R10 000 000** (s.109) + civil claims (s.99) + account-number offences up to 10 years (s.105/107). Cites Condition 7 (s.19) and Condition 3 (s.13) with file:line.
 5. **Why now / ask (20s):** Same pattern exists in real apps. The Docket is the shovel: turn logs into a debt ledger you can actually settle.
 
-📺 Demo video — unlisted YouTube, 5–10 min (link here once recorded)
+📺 **Demo video:** [https://youtu.be/J2Bk5ztDYfw](https://youtu.be/J2Bk5ztDYfw) (unlisted · WhatsApp intro + Molato demo · ~5 min)
 
 ### Cold-machine checklist (run before you submit)
 
@@ -139,4 +139,4 @@ Complete for WeThinkCode_ Cohort2025 elective proof-of-work (due 25 Sept 2026):
 - [x] Auto-generated `docket.json` + `DOCKET.md`
 - [x] Offline cold-machine self-test
 - [x] OWASP M6 file:line mapping
-- [ ] Demo video link (record on emulator/device, paste above)
+- [x] Demo video link ([youtu.be/J2Bk5ztDYfw](https://youtu.be/J2Bk5ztDYfw))
